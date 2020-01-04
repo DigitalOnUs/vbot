@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	addresss = ":7001"
+	addresss = "8080"
 )
 
 func main() {
@@ -19,13 +19,13 @@ func main() {
 	// routes (default answers)
 	r.POST("/consume", requests.ConsumeIntents)
 
-	if err := r.Run(addresss); err != nil {
+	if err := r.Run(":" + addresss); err != nil {
 		logrus.WithError(err).Fatal("cannot start server")
 	}
 }
 
 func init() {
-	if val := os.Getenv("LISTENER"); val != "" {
+	if val := os.Getenv("PORT"); val != "" {
 		addresss = val
 	}
 }
